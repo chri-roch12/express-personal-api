@@ -53,8 +53,8 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/beers", description: "Creates new beer recipe"} //
-      {method: "PUT", path: "/api/beers", description: "Updates a beer recipe"} 
+      {method: "POST", path: "/api/beers", description: "Creates new beer recipe"}, //
+      {method: "PUT", path: "/api/beers", description: "Updates a beer recipe"}, 
       {method: "DELETE", path: "/api/beers", description: "Destroys a beer recipe"}
     ]
   })
