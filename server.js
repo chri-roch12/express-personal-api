@@ -41,6 +41,19 @@ app.get('/', function homepage(req, res) {
  * JSON API Endpoints
  */
 
+ app.get('/api/profile', function (req, res) {
+   var chris = {
+     name: "Chris Prochnow",
+     githubLink: "https://github.com/chri-roch12/express-personal-api",
+     githubProfileImage: "https://avatars2.githubusercontent.com/u/25183085?v=3&s=400",
+     personalSiteLink: "https://chri-roch12.github.io",
+     currentCity: "Berkeley, CA",
+     siblings: "Jon Prochnow"
+   };
+   res.send(chris);
+ });
+
+
 //find all beer recipes
 app.get('/api/beer', function (req, res) {
   db.Beer.find(function(err, beers){
@@ -67,10 +80,8 @@ app.post('/api/beer', function (req, res) {
 
 //Delete a beer recipe
 app.delete('/api/beer/:id', function (req, res) {
-  // get book id from url params (`req.params`)
   console.log('beer deleted', req.params);
   var beerId = req.params.id;
-  // find the index of the book we want to remove
   db.Beer.findOneAndRemove({ _id: beerId }, function (err, deletedBeer) {
     res.json(deletedBeer);
   });
