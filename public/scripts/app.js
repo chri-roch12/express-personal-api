@@ -15,7 +15,7 @@ $(document).ready(function(){
     error: handleError
   });
 
-  $("#newBeerForm").submit(function(e) {
+  $("#newBeerForm").on("click", function(e) {
     e.preventDefault();
     $.ajax({
       method: "POST",
@@ -26,7 +26,7 @@ $(document).ready(function(){
     });
   });
 
-  $(".deleteBtn").click( function() {
+  $(".deleteBtn").on("click", function() {
     $ajax({
       method: "DELETE",
       url: "/api/beer/" + $(this).attr("data-id"),
@@ -60,7 +60,6 @@ function handleSuccess(json) {
 };
 
 function handleError(e) {
-  console.log('uh oh');
   $('#beerList').text('Failed to load recipes');
 };
 
@@ -73,3 +72,12 @@ function newBeerSuccess(json) {
 function newBeerError() {
   console.log("Beer creation error.");
 };
+
+function deleteBookSuccess() {
+  $("data-id").remove();
+  render();
+};
+
+function deleteBookError() {
+  console.log("Delete beer recipe error.");
+}
