@@ -1,4 +1,3 @@
-console.log("Sanity Check: JS is working!");
 
 var $beerList;
 var allBeers = [];
@@ -11,10 +10,11 @@ $(document).ready(function(){
   $.ajax({
     method: "GET",
     url: "api/beer",
-    success: handleSuccess,
-    error: handleError
+    success: handleSuccess(),
+    error: handleError()
   });
 
+//BUG* iterates db over and over.
   $("#newBeerForm").on("click", function(e) {
     e.preventDefault();
     $.ajax({
@@ -26,6 +26,7 @@ $(document).ready(function(){
     });
   });
 
+//BUG* does not delete
   $(".deleteBtn").on("click", function() {
     $ajax({
       method: "DELETE",
@@ -50,6 +51,11 @@ function getBeerHtml(beer) {
           </p>`;
 };
 
+/*
+I think having these functions referenced outside the ajax action is breaking their functionality. Moving them into the ajax code is a huge task
+*/
+
+//SOmething in how this works is causing the iteration, Thelma helpped point to this
 function getAllBeerHtml(beers) {
   return beers.map(getBeerHtml).join("");
 };
@@ -68,6 +74,7 @@ function handleError(e) {
   $('#beerList').text('Failed to load recipes');
 };
 
+//BUG* db does not show new json object
 function newBeerSuccess(json) {
   $("#newBeerForm input").val("");
   allBeers.push(json);
