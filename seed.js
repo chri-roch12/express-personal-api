@@ -31,7 +31,7 @@ var beer_list = [
   hops: "Centennial, Zeus, Apollo, Nugs",
   malt: "Briess Organic 2-row,Crystal malt L60, Chocolate Malt",
   dryhop: true,
-  description: "This devious brew is a highly sessionable black IPA. The strong influences of darker malts and heady punches of Apollo anf Zeus hops give a great big mouthy flavor.",
+  description: "This devious brew is a highly sessionable black IPA. The strong influences of darker malts and heady punches of Apollo and Zeus hops give a great big mouthy flavor.",
   },
   {
   name: "Fog-Horn Red ESP",
