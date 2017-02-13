@@ -27,11 +27,12 @@ var beer_list = [
   },
 ];
 
-db.Beer.create(beer_list, function(err, beer){
-  if (err){
-    return console.log("Error:", err);
-  }
+db.Beer.remove({}, function(err, beer) {
+  console.log ("cleared beer recipes.");
+  db.Beer.create(beer_list, function(err, beer){
+    if (err){console.log("seed error."), err}
+      console.log("seed success");
+      process.exit();
+    });
 
-  console.log("Created new beer list", beer._id)
-  process.exit(); 
-})
+});
