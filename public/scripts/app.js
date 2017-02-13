@@ -30,8 +30,13 @@ $(document).ready(function(){
     $ajax({
       method: "DELETE",
       url: "/api/beer/" + $(this).attr("data-id"),
-      succcess: deleteBookSuccess,
-      error: deleteBookError
+      succcess: function deleteBookSuccess("data-id") {
+        $("data-id").remove();
+        render();
+      };
+      error: function deleteBookError() {
+        console.log("Delete beer recipe error.");
+      };
     });
   });
 });
@@ -73,10 +78,11 @@ function newBeerError() {
   console.log("Beer creation error.");
 };
 
-function deleteBookSuccess() {
-  $("data-id").remove();
-  render();
-};
+//Trying to move the functions into the ajax call. Maybe some sort of issue with process order
+// function deleteBookSuccess() {
+//   $("data-id").remove();
+//   render();
+// };
 
 function deleteBookError() {
   console.log("Delete beer recipe error.");

@@ -58,18 +58,25 @@ app.get('/', function homepage(req, res) {
 app.get('/api/beer', function (req, res) {
   db.Beer.find(function(err, beers){
     if (err) { return console.log("index error: " + err); }
-    res.json(beers);
+    if (req.query.limit === undefined) {
+      res.json(beers);
+    } else {
+      var limit = Number(req.query.limit);
+      var beers = beers.slice(0, limit);
+      res.json(beers)
+    }
   });
 });
 
 //find one beer recipe
 app.get('/api/beer/:id', function (req, res) {
-  db.Beer.findOne({_id: req.params.id }, function(err, data) {
-    res.json(data);
+  var beerId = eq.params.id;
+  db.Beer.findOne({_id: id}, function(err, beer) {
+    res.json(beer);
   });
 });
 
-//Create new beer recipe
+//Create new beer recipe. *BUG broken.
 app.post('/api/beer', function (req, res) {
   console.log('Beer to create', req.newBeerForm);
   var newBeer = new db.Beer(req.newBeerForm);
@@ -78,7 +85,7 @@ app.post('/api/beer', function (req, res) {
   });
 });
 
-//Delete a beer recipe
+//Delete a beer recipe. BUG broken.
 app.delete('/api/beer/:id', function (req, res) {
   console.log('beer deleted', req.params);
   var beerId = req.params.id;
