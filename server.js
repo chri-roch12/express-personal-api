@@ -37,10 +37,45 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
 /*
  * JSON API Endpoints
  */
+
+//find all beer recipes
+app.get('/api/beer', function (req, res) {
+  db.Beer.find(function(err, beers){
+    if (err) { return console.log("index error: " + err); }
+    res.json(beers);
+  });
+});
+
+//find one beer recipe
+app.get('/api/beer/:id', function (req, res) {
+  db.Beer.findOne({_id: req.params.id }, function(err, data) {
+    res.json(data);
+  });
+});
+
+//Create new beer recipe
+app.post('/api/beer', function (req, res) {
+  console.log('Beer to create', req.newBeerForm);
+  var newBeer = new db.Beer(req.newBeerForm);
+  newBeer.save(function handleDBBeerSaved(err, savedBeer) {
+    res.json(savedBeer);
+  });
+});
+
+//Delete a beer recipe
+app.delete('/api/beer/:id', function (req, res) {
+  // get book id from url params (`req.params`)
+  console.log('beer deleted', req.params);
+  var beerId = req.params.id;
+  // find the index of the book we want to remove
+  db.Beer.findOneAndRemove({ _id: beerId }, function (err, deletedBeer) {
+    res.json(deletedBeer);
+  });
+});
+
 
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
