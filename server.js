@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+ var db = require('./models');
 
 /**********
  * ROUTES *
@@ -46,16 +46,18 @@ app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/chri-roch12/express_self_api/README.md", // Changed to me
     baseUrl: "http://stormy-wave-21523.herokuapp.com", // Changed to me
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
+      {method: "GET", path: "/api/beers", description: "Gets all beer recipes"},
       {method: "POST", path: "/api/beers", description: "Creates new beer recipe"}, //
-      {method: "PUT", path: "/api/beers", description: "Updates a beer recipe"}, 
-      {method: "DELETE", path: "/api/beers", description: "Destroys a beer recipe"}
+      {method: "GET", path: "/api/beers/:id", description: "Gets a beer recipes"},
+      {method: "PUT", path: "/api/beers/:id", description: "Updates a beer recipe"},
+      {method: "DELETE", path: "/api/beers/:id", description: "Destroys a beer recipe"}
     ]
   })
 });
